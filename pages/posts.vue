@@ -4,13 +4,16 @@
         <h1>Posts!</h1>
 
         <ul class="flex flex-col gap-4">
-            <li v-for="post in posts">
+            <li
+                v-for="(v, i) in posts"
+                :key="i">
                 <NuxtLink
                     class="underline"
-                    :href="getPostRoute(post.id)">
-                    {{ post.title }}
+                    :href="getPostRoute(v.id)">
+                    {{ v.title }}
                 </NuxtLink>
-                <p class="text-slate-400">{{ post.body }}</p>
+                <p>By {{ v.userId }}</p>
+                <p class="text-slate-400">{{ v.body }}</p>
             </li>
         </ul>
     </div>
@@ -23,16 +26,15 @@ interface Posts {
     title: string;
     body: string;
 }
-interface Fetch {
-    data: Posts[];
-}
 
 definePageMeta({
     title: 'Posts',
 });
 
 const route = useRoute();
-const { data: posts } = await useFetch<Fetch>('https://jsonplaceholder.typicode.com/posts');
+const response = await useFetch('https://jsonplaceholder.typicode.com/posts');
+const posts = response.data.value as Posts[];
+const error = response.error.value;
 
 function getPostRoute(id: number) {
     return `/post/${id}`;
