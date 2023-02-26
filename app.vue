@@ -1,27 +1,29 @@
 <template>
-  <div>
-    <NuxtLayout>
-      <NuxtPage />
-    </NuxtLayout>
-  </div>
+    <div>
+        <NuxtLayout>
+            <NuxtPage />
+        </NuxtLayout>
+    </div>
 </template>
 
 <script setup>
-useHead({  
-  meta: [{ 
-    name: 'description', 
-    content: 'Simple Nuxt App' 
-  }]
+useHead({
+    meta: [
+        {
+            name: 'description',
+            content: 'Simple Nuxt App',
+        },
+    ],
 });
 </script>
 
 <style>
 .page-enter-active,
 .page-leave-active {
-  transition: all 0.2s;
+    transition: all 0.2s;
 }
 .page-enter-from,
 .page-leave-to {
-    opacity: 0; 
+    opacity: 0;
 }
 </style>
